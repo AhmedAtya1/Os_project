@@ -7,7 +7,7 @@ test=Sjf()
 pro=[]
 
 
-for i in range (5):
+for i in range (4):
     a=process()
     pro.append(a)
     pro[i].name='p'+str(i)
