@@ -1,6 +1,6 @@
 class scheduler :
     n=0
-    p=[]
-    l=[]
+    list_process=[]
+    list_element=[]
     preemptive=0
 
