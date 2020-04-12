@@ -27,7 +27,7 @@ class Sjf(scheduler):
                 self.list_element.append(a)
                 (self.list_element[i]).p=self.list_process[i]
         else:
-            check=0
+            check=1
             while len(self.according_to_arrival)!=check:
                 a = element()
                 for i in range(len(self.according_to_arrival)):
