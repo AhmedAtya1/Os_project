@@ -1,7 +1,6 @@
 from Scheduler import scheduler
 from Element import element
 import operator
-
 class fcfs (scheduler):
     def calc(self):
         self.list_process.sort(key=operator.attrgetter('arrival_time'))

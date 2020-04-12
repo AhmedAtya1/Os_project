@@ -1,6 +1,3 @@
-from Element import element
-
-
 class scheduler :
     n=0
     list_process=[]

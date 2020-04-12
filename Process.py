@@ -1,6 +1,5 @@
 class process :
-
-    priority=0
+    pr=0
     arrival_time=0
     burst_time=0
     name=''
