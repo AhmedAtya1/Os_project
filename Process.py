@@ -1,6 +1,6 @@
 class process :
     def __init__(self):
-        priority=0
-        arrival_time=0
-        burst_time=0
-        name=''
+        self.priority=0
+        self.arrival_time=0
+        self.burst_time=0
+        self.name=''
