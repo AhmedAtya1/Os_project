@@ -1,4 +1,7 @@
 from Scheduler import scheduler
+from Element import element
+
+
 class fcfs (scheduler):
     def calc(self):
         x=[]
@@ -6,8 +9,9 @@ class fcfs (scheduler):
         a = zip(x,self.list_process)
         sorted(a)
         b=0
-        z=[]
         for j,k in a:
-            z[b]=k
+            self.list_process[b]=k
             b=b+1
-        self.list_element=z
+        for i in range(len(self.list_process)):
+            self.list_element[i] = element()
+            (self.list_element[i]).p = self.list_process[i]
