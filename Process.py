@@ -1,6 +1,8 @@
 class process :
-    def __init__(self):
-        self.priority=0
-        self.arrival_time=0
-        self.burst_time=0
-        self.name=''
+
+    priority=0
+    arrival_time=0
+    burst_time=0
+    name=''
+    def __repr__(self):
+        return self.name +' burst time = '+str(self.burst_time)+' arrival time = '+str(self.arrival_time)+' priority = '+str(self.priority)
