@@ -18,4 +18,6 @@ test.list_process=pro
 test.calc()
 for i in range(len(test.list_element)):
 
-    print((test.list_element[i]).p.name)
+    print(test.list_element[i])
+#,pro[4].burst_time,pro[5].burst_time
+#,pro[4].arrival_time,pro[5].arrival_time
