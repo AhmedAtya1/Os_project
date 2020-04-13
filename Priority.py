@@ -4,6 +4,7 @@ from copy import deepcopy
 import operator
 class priority(scheduler):
     def calc_non_p(self):
+        hhhhh='hhhh'
 
     def cal_p(self):
         current_list_p=[]
