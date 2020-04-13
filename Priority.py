@@ -1,17 +1,10 @@
 from Scheduler import scheduler
 from Element import element
+from copy import deepcopy
 import operator
 class priority(scheduler):
     def calc_non_p(self):
-        self.list_process.sort(key=operator.attrgetter('pr'))
-        start=0
-        for i in range(len(self.list_process)):
-            a = element()
-            self.list_element.append(a)
-            (self.list_element[i]).p = self.list_process[i]
-            (self.list_element[i]).start = start
-            (self.list_element[i]).end = start + self.list_process.burst_time
-           # 555555555555555start = start + self.list_process.burst_time
+
     def cal_p(self):
         current_list_p=[]
         t = []
