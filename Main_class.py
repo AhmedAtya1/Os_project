@@ -20,4 +20,4 @@ for i in range(len(test.list_element)):
 
     print(test.list_element[i])
 #,pro[4].burst_time,pro[5].burst_time 0,1,2,3,4,5         8,4,2,1,3,2
-#,pro[4].arrival_time,pro[5].arrival_time
+#,pro[4].arrival_time,pro[5].arrival_timee
