@@ -27,7 +27,7 @@ p4.name='p4'
 p5.name='p5'
 list_p=[p1,p2,p3,p4,p5]
 x=priority()
-x.preemptive=1
+x.preemptive=0
 x.n=5
 x.list_process=list_p
 x.calc()
