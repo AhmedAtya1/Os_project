@@ -22,7 +22,7 @@ class priority(scheduler):
 
 
     def calc_non_p(self):
-
+        self.int_le3yon_a7md_m7mod()
         self.Sort('arrival_time')
         self.currentTime= (self.list_process[0]).arrival_time
         self.pushIfcamed(self.queue,self.currentTime,self.currentTime+1)

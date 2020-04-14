@@ -1,7 +1,7 @@
 from Scheduler import scheduler  #????????????
 from Element import element
 import operator
-class round (scheduler):
+class roound (scheduler):
     quantum=0
     currentTime=0
     queue=[]
