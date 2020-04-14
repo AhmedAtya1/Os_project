@@ -4,6 +4,8 @@ from Fcfs import fcfs
 from Round import roound
 from SJF import Sjf
 from Priority import  priority
+import os
+import sys
 from Element import element
 root=Tk()
 root.title("cpu scheduler")
@@ -11,8 +13,8 @@ ii=0
 def stage1(event):
     list_of_process=[]
     def reset(event):
-        main_frame.pack_forget()
-        main_frame.destroy()
+        root.destroy()
+        os.system('python "modified_gui.py"')
 
 
     def draw(List_of_elemnts,wt):
