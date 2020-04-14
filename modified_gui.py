@@ -13,6 +13,8 @@ def stage1(event):
     def reset(event):
         main_frame.pack_forget()
         main_frame.destroy()
+
+
     def draw(List_of_elemnts,wt):
         gantt = Frame(main_frame,width=1300)
         gantt.pack()
@@ -50,6 +52,8 @@ def stage1(event):
             wt=f1.waiting_time()
             f1.empty()
             draw(f1.list_element,wt)
+
+
         elif s == "sjf":
             pre=int(pree_entry.get())
             pree_entry.delete(0, END)
@@ -61,6 +65,8 @@ def stage1(event):
             wt=f1.waiting_time()
             f1.empty()
             draw(f1.list_element,wt)
+
+
         elif s == "priority":
             pre = int(pree_entry.get())
             pree_entry.delete(0, END)
@@ -72,14 +78,19 @@ def stage1(event):
             wt=f1.waiting_time()
             f1.empty()
             draw(f1.list_element,wt)
+
         elif s == "rr":
+            q = int(q_entry.get())
+            q_entry.delete(0, END)
             f1 = round()
             f1.list_process = list_of_process
+            f1.quantum=q
             f1.real()
             f1.calc()
             wt=f1.waiting_time()
             f1.empty()
             draw(f1.list_element,wt)
+
     def show(ii):
         def get_info(event):
             global ii
@@ -133,6 +144,13 @@ def stage1(event):
         pree__Label.grid(row=0,column=0)
         pree_entry = Entry(down_frame)
         pree_entry.grid(row=0, column=1)
+    if s == "rr":
+        down_frame = Frame(main_frame)
+        down_frame.pack(side=BOTTOM)
+        q__Label = Label(down_frame, text="Quantum")
+        q__Label.grid(row=0,column=0)
+        q_entry = Entry(down_frame)
+        q_entry.grid(row=0, column=1)
     result_button=Button(main_frame, text="result")
     result_button.pack()
     result_button.bind("<Button-1>", claculate)

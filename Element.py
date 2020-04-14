@@ -7,3 +7,6 @@ class element :
 
     def __repr__(self):
         return 'process name: %s start: %s end: %s'%(self.p.name,str(self.start),str(self.end))
+
+
+
