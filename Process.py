@@ -1,7 +1,7 @@
 class process :
     pr=0
-    arrival_time=0
-    burst_time=0
+    arrival_time=0.0
+    burst_time=0.0
     name=''
     state= 'waiting'
     elementsNumber=0

@@ -1,29 +1,34 @@
 from Element import element
-from Process import process
+from copy import deepcopy
 import operator
 
 class scheduler :
     n=0
+    unmodified=[]
     list_process=[]
     list_element=[]
     preemptive=0
+    def real(self):
+        self.unmodified = deepcopy(self.list_process)
     def Sort(self,sort_according_to_what='burst_time'):
         self.list_process.sort(key=operator.attrgetter(sort_according_to_what))
     def waiting_time(self):
         if len(self.list_element)!=0:
             time = []
             final=0.0
-            for i in self.list_process:
+            for i in self.unmodified:
                 new=[]
                 for j in self.list_element:
-                    if j.p==i:
+                    if j.p.name==i.name:
                         new.append(j)
                 if len(new)!=0:
-                    teee = (new[-1].end)-(new[0].start)-(i.burst_time )+ (i.arrival_time - new[0].start-i)
-                    time.append(teee)
+                    if len(new)==1:t=new[0].start-i.arrival_time
+                    else:
+                        t = new[-1].end-new[0].start-i.burst_time + i.arrival_time - new[0].start
+                    time.append(t)
             for k in time :
                 final += float(k)
-                final /=  len(self.list_process)
+            final /=  len(self.list_process)
             return final
 
 
