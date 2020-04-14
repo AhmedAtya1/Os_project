@@ -2,13 +2,20 @@ from Scheduler import scheduler
 from Element import element
 import operator
 class fcfs (scheduler):
+    currentTime = 0
+
+    def addElement(self,start,proc):
+        a = element()
+        a.start=start
+        a.end=proc.burst_time+start
+        a.p=proc
+        a.duration=a.start-a.end
+        self.list_element.append(a)
+        self.currentTime =a.end
     def calc(self):
         self.list_process.sort(key=operator.attrgetter('arrival_time'))
-        start = 0
         for i in range(len(self.list_process)):
-            a = element()
-            self.list_element.append(a)
-            (self.list_element[i]).start=start
-            (self.list_element[i]).p = self.list_process[i]
-            (self.list_element[i]).end=(self.list_element[i]).p.burst_time+start
-            start=(self.list_element[i]).end
+            if (self.list_process[i]).arrival_time>self.currentTime:
+                self.addElement((self.list_process[i]).arrival_time,self.list_process[i])
+            else :
+                self.addElement(self.currentTime, self.list_process[i])
