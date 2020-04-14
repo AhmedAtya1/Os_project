@@ -13,9 +13,10 @@ def stage1(event):
     def reset(event):
         main_frame.pack_forget()
         main_frame.destroy()
-    def draw(List_of_elemnts):
+    def draw(List_of_elemnts,wt):
         gantt = Frame(main_frame,width=1300)
         gantt.pack()
+        wait="avg waiting time is  :  " +str(wt)
 
         def myfunction(event):
             canvas.configure(scrollregion=canvas.bbox("all"), width=1300, height=200)
@@ -35,34 +36,47 @@ def stage1(event):
             e = Label(frame, text=s, borderwidth=2, relief="solid", width=10 + int(i.end - i.start), height=5)
             e.grid(row=0, column=int(x))
             x = x + (i.end - i.start)
+        lb =Label(gantt,text=wait)
+        lb.pack()
     def claculate(event):
         if s == "fcfs":
             f1 = fcfs()
             f1.list_process = list_of_process
+            f1.real()
             f1.calc()
-
-            draw(f1.list_element)
+            wt=f1.waiting_time()
+            f1.empty()
+            draw(f1.list_element,wt)
         elif s == "sjf":
             pre=int(pree_entry.get())
             pree_entry.delete(0, END)
             f1 = Sjf()
             f1.preemptive=pre
             f1.list_process = list_of_process
+            f1.real()
             f1.calc()
-            draw(f1.list_element)
+            wt=f1.waiting_time()
+            f1.empty()
+            draw(f1.list_element,wt)
         elif s == "priority":
             pre = int(pree_entry.get())
             pree_entry.delete(0, END)
             f1 = priority()
             f1.preemptive = pre
             f1.list_process = list_of_process
+            f1.real()
             f1.calc()
-            draw(f1.list_element)
+            wt=f1.waiting_time()
+            f1.empty()
+            draw(f1.list_element,wt)
         elif s == "rr":
             f1 = round()
             f1.list_process = list_of_process
+            f1.real()
             f1.calc()
-            draw(f1.list_element)
+            wt=f1.waiting_time()
+            f1.empty()
+            draw(f1.list_element,wt)
     def show(ii):
         def get_info(event):
             global ii
