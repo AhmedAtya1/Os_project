@@ -4,7 +4,6 @@ import operator
 class round (scheduler):
     quantum=0
     currentTime=0
-    currentProcess=''
     queue=[]
 
     def setQuantum (self):
