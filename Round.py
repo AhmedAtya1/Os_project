@@ -4,6 +4,7 @@ import operator
 class roound (scheduler):
     quantum=0
     currentTime=0
+    #currentProcess=''
     queue=[]
 
     def setQuantum (self):
@@ -30,8 +31,10 @@ class roound (scheduler):
 
     def calc(self):
         self.int_le3yon_a7md_m7mod()
+        self.quantum = round(self.quantum)
         if self.quantum==0 : #not givven
             self.setQuantum()
+
         self.calcQuantums()
         self.Sort('arrival_time')
         self.currentTime=(self.list_process[0]).arrival_time #begin when first process come
