@@ -22,9 +22,10 @@ class scheduler :
                     if j.p.name==i.name:
                         new.append(j)
                 if len(new)!=0:
-                    if len(new)==1:t=new[0].start-i.arrival_time
+                    if len(new)==1:
+                        t=new[0].start-i.arrival_time
                     else:
-                        t = new[-1].end-new[0].start-i.burst_time + i.arrival_time - new[0].start
+                        t = new[-1].end-new[0].start-i.burst_time + new[0].start  - i.arrival_time
                     time.append(t)
             for k in time :
                 final += float(k)
