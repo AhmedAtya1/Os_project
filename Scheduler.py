@@ -9,13 +9,27 @@ class scheduler :
     preemptive=0
     def Sort(self,sort_according_to_what='burst_time'):
         self.list_process.sort(key=operator.attrgetter(sort_according_to_what))
+    def waiting_time(self):
+        if len(self.list_element)!=0:
+            time = []
+            final=0.0
+            for i in self.list_process:
+                new=[]
+                for j in self.list_element:
+                    if j.p==i:
+                        new.append(j)
+                if len(new)!=0:
+                    teee = (new[-1].end)-(new[0].start)-(i.burst_time )+ (i.arrival_time - new[0].start-i)
+                    time.append(teee)
+            for k in time :
+                final += float(k)
+                final /=  len(self.list_process)
+            return final
 
-    def put_element(self,process,start,end):
-       a=element()
-       self.list_element.append(a)
-       (self.list_element[-1]).p =process
-       (self.list_element[-1]).start=start
-       (self.list_element[-1]).end = end
+
+
+
+
     def empty(self):
         if len(self.list_element)!=0:
             for i in range(len(self.list_element)) :
