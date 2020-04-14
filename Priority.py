@@ -3,8 +3,49 @@ from Element import element
 from copy import deepcopy
 import operator
 class priority(scheduler):
+    queue = []
+    currentTime = 0
+    def pushIfcamed(self,Queue, Start, End):
+        for i in range(len(self.list_process)):
+            if (self.list_process[i]).arrival_time in range(Start, End):
+                Queue.append(self.list_process[i])
+        Queue.sort(key=operator.attrgetter('pr'))
+
+    def addElement(self, start, proc):
+       a = element()
+       a.start = start
+       a.end = proc.burst_time + start
+       a.p = proc
+       a.duration = a.start - a.end
+       self.list_element.append(a)
+
+
+
     def calc_non_p(self):
-        hhhhh='hhhh'
+
+        self.Sort('arrival_time')
+        self.currentTime= (self.list_process[0]).arrival_time
+        self.pushIfcamed(self.queue,self.currentTime,self.currentTime+1)
+        for i in range(len(self.list_process)):
+            if len(self.queue)!=0:
+                self.addElement(self.currentTime,self.queue[0])
+                oldCur=self.currentTime
+                self.currentTime += self.queue[0].burst_time
+                del self.queue[0]
+                self.pushIfcamed(self.queue, oldCur+1, self.currentTime + 1)
+            else:
+                for i in range(len(self.list_process)):
+                    if (self.list_process[i]).arrival_time > self.currentTime:
+                        self.currentTime=self.list_process[i].arrival_time
+                        break
+                self.pushIfcamed(self.queue, self.currentTime, self.currentTime + 1)
+                self.addElement(self.currentTime,self.queue[0])
+                self.currentTime += self.queue[0].burst_time
+                ooldCur = self.currentTime
+                del self.queue[0]
+                self.pushIfcamed(self.queue, ooldCur+1, self.currentTime + 1)
+
+
 
     def cal_p(self):
         current_list_p=[]
@@ -41,7 +82,7 @@ class priority(scheduler):
                         elif t[i] + current_p.burst_time > t[i + 1]:
                             current_p.burst_time = current_p.burst_time - (t[i + 1] - t[i])
             else:  # may happen when a process arrive when another process is running
-                if current_p.pr <= current_list_p[0].pr :
+                if current_p.pr <= current_list_p[0].pr:
                     if i==len(t)-1:  # because of the last iteration
                         self.list_element[-1].end = t[i] + current_p.burst_time
                         t.append(t[i] + current_p.burst_time)
@@ -64,6 +105,7 @@ class priority(scheduler):
                     self.list_element[-1].start = t[i]
                     if i == len(t) - 1:  # because of the last iteration
                         self.list_element[-1].end = t[i] + current_p.burst_time
+                        t.append(t[i] + current_p.burst_time)
                         del current_list_p[0]
                         current_p = None
                     else : # da l 3ady
@@ -75,7 +117,6 @@ class priority(scheduler):
                         elif t[i] + current_p.burst_time > t[i + 1]:
                             current_p.burst_time = current_p.burst_time - (t[i + 1] - t[i])
             x=len(t)
-            print(i,x)
             i=i+1
     def calc(self):
         if self.preemptive==0: self.calc_non_p()
