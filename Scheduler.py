@@ -32,7 +32,10 @@ class scheduler :
             final /=  len(self.list_process)
             return final
 
-
+    def int_le3yon_a7md_m7mod(self):
+        for i in self.list_process:
+            i.burst_time=round(i.burst_time)
+            i.arrival_time=round(i.arrival_time)
 
 
 

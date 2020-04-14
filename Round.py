@@ -29,6 +29,7 @@ class round (scheduler):
 
 
     def calc(self):
+        self.int_le3yon_a7md_m7mod()
         if self.quantum==0 : #not givven
             self.setQuantum()
         self.calcQuantums()
