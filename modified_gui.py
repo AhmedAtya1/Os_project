@@ -7,19 +7,33 @@ from Priority import  priority
 from Element import element
 root=Tk()
 root.title("cpu scheduler")
+ii=0
 def stage1(event):
     list_of_process=[]
     def reset(event):
         main_frame.pack_forget()
         main_frame.destroy()
     def draw(List_of_elemnts):
-        gantt = Frame(main_frame)
+        gantt = Frame(main_frame,width=1300)
         gantt.pack()
+
+        def myfunction(event):
+            canvas.configure(scrollregion=canvas.bbox("all"), width=1300, height=200)
+
+        canvas = Canvas(gantt)
+        frame = Frame(canvas)
+        myscrollbar = Scrollbar(gantt, orient="horizontal", command=canvas.xview)
+        canvas.configure(xscrollcommand=myscrollbar.set)
+        canvas.create_window((0, 0), window=frame, anchor='nw')
+        frame.bind("<Configure>", myfunction)
+
+        myscrollbar.pack(side="bottom", fill="x")
+        canvas.pack(side="bottom")
         x = 0
         for i in List_of_elemnts:
             s = i.p.name+" ( "+str(i.start)+" : " +str(i.end)+" )"
-            e = Label(gantt, text=s, borderwidth=2, relief="solid", width=7 + int(i.end - i.start), height=5)
-            e.grid(row=0, column=x)
+            e = Label(frame, text=s, borderwidth=2, relief="solid", width=7 + int(i.end - i.start), height=5)
+            e.grid(row=0, column=int(x))
             x = x + (i.end - i.start)
     def claculate(event):
         if s == "fcfs":
@@ -49,10 +63,11 @@ def stage1(event):
             f1.list_process = list_of_process
             f1.calc()
             draw(f1.list_element)
-    def show(i):
+    def show(ii):
         def get_info(event):
+            global ii
             P = process()
-            P.name = "p" + str(i + 1)
+            P.name = "p" + str(ii + 1)
             P.burst_time = float(bt_entry.get())
             P.arrival_time = float(at_entry.get())
             at_entry.delete(0, END)
@@ -61,7 +76,11 @@ def stage1(event):
                 P.pr=int(pr_entry.get())
                 pr_entry.delete(0,END)
             list_of_process.append(P)
-        st = "process " + str(i + 1)
+            down_frame.pack_forget()
+            down_frame.destroy()
+            ii=ii+1
+            if ii<n :show(ii)
+        st = "process " + str(ii + 1)
         down_frame = Frame(main_frame)
         down_frame.pack(side=BOTTOM)
         l = Label(down_frame, text=st)
@@ -88,7 +107,8 @@ def stage1(event):
     n_entry.delete(0,END)
     main_frame = Frame(root)
     main_frame.pack(side=BOTTOM)
-    for i in range(n): show(i)
+    ii=0
+    show(ii)
     if s == "sjf" or  s=="priority" :
         down_frame = Frame(main_frame)
         down_frame.pack(side=BOTTOM)
