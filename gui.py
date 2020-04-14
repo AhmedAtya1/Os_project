@@ -1,57 +1,36 @@
 from tkinter import *
 from Process import process
 from Fcfs import fcfs
-from copy import deepcopy
 from Element import element
 root=Tk()
 root.title("cpu scheduler")
-
-
-def get_info(event):
-    P = process()
-    P.name = "p" + str(i + 1)
-    P.burst_time = int(bt_entry.get())
-    P.arrival_time = int(at_entry.get())
-    at_entry.delete(0, END)
-    bt_entry.delete(0, END)
-    p.append(P)
-
-
-def draw():
-    gantt=Frame()
-    gantt.pack(side =RIGHT)
-    x=0
-    for i in List_of_elemnts:
-        e=Label(gantt,text=i.p.name ,borderwidth=2, relief="solid",width=1+(i.end-i.start),height=5)
-        e.grid(row=0,column=x)
-        x=x+(i.end-i.start)
-def FCFS(n) :
-    def cont(event):
-        global List_of_elemnts
-        f1 = fcfs()
-        f1.list_process = p
-        f1.calc()
-        draw()
-        f1.out()
-        List_of_elemnts = deepcopy(f1.list_element)
-    def reset(event):
-        down_frame.pack_forget()
-        down_frame.destroy()
-
-    b2 = Button(top_frame, text="reset")
-    b2.bind("<Button-1>", reset)
-    b2.grid(column=3)
-    left_frame = Frame(root)
-    left_frame.pack(side=LEFT)
-    b=Button(left_frame, text="result")
-    b.bind("<Button-1>", cont)
-    b.pack()
-def sjf(n): pass
-def priority(n): pass
-def rr(n) : pass
 def stage1(event):
     list_of_process=[]
+    List_of_elemnts=[]
     preemptive=0
+    def reset(event):
+        main_frame.pack_forget()
+        main_frame.destroy()
+    def draw():
+        gantt = Frame(main_frame)
+        gantt.pack(side=RIGHT)
+        x = 0
+        for i in List_of_elemnts:
+            e = Label(gantt, text=i.p.name, borderwidth=2, relief="solid", width=1 + (i.end - i.start), height=5)
+            e.grid(row=0, column=x)
+            x = x + (i.end - i.start)
+    def claculate(event):
+        global List_of_elemnts
+        if s == "fcfs":
+            f1 = fcfs()
+            f1.list_process = list_of_process
+            f1.calc()
+            List_of_elemnts = f1.list_element
+            draw()
+            f1.out()
+        elif s == "sjf":
+        elif s == "priority":
+        elif s == "rr":
     def show(i):
         def get_info(event):
             P = process()
@@ -65,6 +44,8 @@ def stage1(event):
                 pr_entry.delete(0,END)
             list_of_process.append(P)
         s = "process " + str(i + 1)
+        down_frame = Frame(main_frame)
+        down_frame.pack(side=BOTTOM)
         l = Label(down_frame, text=s)
         l.grid(row=0)
         at_label = Label(down_frame, text="arrival time")
@@ -87,22 +68,20 @@ def stage1(event):
     n=int(n_entry.get())
     type_entry.delete(0,END)
     n_entry.delete(0,END)
-    down_frame = Frame(root)
-    down_frame.pack(side=BOTTOM)
+    main_frame = Frame(root)
+    main_frame.pack(side=BOTTOM)
     for i in range(n): show(i)
     if s == "sjf" or  s=="priority" :
+        down_frame = Frame(main_frame)
+        down_frame.pack(side=BOTTOM)
         pree__Label = Label(down_frame, text="priority")
-
-
-
-
-
-
-    if s=="fcfs":
-    elif s=="sjf" :
-    elif s=="priority" :
-    elif s=="rr" :
-
+        pree__Label.grid(row=0,column=0)
+        pree_entry = Entry(down_frame)
+        pree_entry.grid(row=0, column=1)
+    result_button=Button(main_frame, text="result")
+    result_button.grid()
+    result_button.bind("<Button-1>", claculate)
+    reset_button.bind("<Button-1>", reset)
 top_frame=Frame(root)
 top_frame.pack()
 n_label=Label(top_frame,text="no of process")
@@ -116,4 +95,6 @@ type_entry.grid(row=2,column=1)
 b1=Button(top_frame,text="OK")
 b1.bind("<Button-1>",stage1)
 b1.grid(column=2,row=1)
+reset_button = Button(root, text="reset")
+reset_button.grid(row=1,column=3)
 root.mainloop()
