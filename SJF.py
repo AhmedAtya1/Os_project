@@ -45,7 +45,17 @@ class Sjf(scheduler):
                         Stop = False
 
                         if (i.arrival_time-compared.arrival_time) == compared.burst_time : # b4of eli bkarno (compared) y5ls fel gap eli mbena wla la2
-                            check=self.end(compared,compared.arrival_time,i.arrival_time,check)
+                            if (compared==self.according_to_arrival[0])and(len(self.according_to_arrival)==len(self.list_process)):
+                                starts=compared.arrival_time
+                            else:starts=self.list_element[-1].end
+                            check=self.end(compared,starts,starts+compared.burst_time,check)
+                            z=a
+                            compared = i
+                            a = self.according_to_arrival.index(i)
+                            if (self.according_to_arrival.index(i) >= z + 1):
+                                z+=1
+                                a=z
+
                             break
                         elif (i.arrival_time-compared.arrival_time) > compared.burst_time: # el gab kpera
                             gab = i.arrival_time - compared.arrival_time - compared.burst_time
@@ -72,8 +82,10 @@ class Sjf(scheduler):
                             a = self.according_to_arrival.index(i)
                             break
                         else:# kda eli ablya m4 by5ls fel gab
-                            if i.burst_time<compared.burst_time:# na el burst bta3y as8r mn el compared fa hw2f el compared
-                                self.put_element(compared,compared.arrival_time,i.arrival_time-compared.arrival_time)
+                            if i.burst_time == compared.burst_time-(i.arrival_time-compared.arrival_time):
+                                Stop = True
+                            elif i.burst_time<compared.burst_time:# na el burst bta3y as8r mn el compared fa hw2f el compared
+                                self.put_element(compared,compared.arrival_time,i.arrival_time)
                                 compared.burst_time -=i.arrival_time-compared.arrival_time
                                 compared = i
                                 a=self.according_to_arrival.index(i)
@@ -92,7 +104,8 @@ class Sjf(scheduler):
                     self.according_to_arrival.sort(key=operator.attrgetter('burst_time'))
                     for k in self.according_to_arrival:
                         check = self.end(k, self.list_element[-1].end, self.list_element[-1].end + k.burst_time,check)
-                a=self.according_to_arrival.index(r)
+                if not Stop:
+                    a=self.according_to_arrival.index(r)
 
 
 
