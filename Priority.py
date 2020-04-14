@@ -82,7 +82,7 @@ class priority(scheduler):
                         elif t[i] + current_p.burst_time > t[i + 1]:
                             current_p.burst_time = current_p.burst_time - (t[i + 1] - t[i])
             else:  # may happen when a process arrive when another process is running
-                if current_p.pr <= current_list_p[0].pr :
+                if current_p.pr <= current_list_p[0].pr:
                     if i==len(t)-1:  # because of the last iteration
                         self.list_element[-1].end = t[i] + current_p.burst_time
                         t.append(t[i] + current_p.burst_time)
@@ -105,6 +105,7 @@ class priority(scheduler):
                     self.list_element[-1].start = t[i]
                     if i == len(t) - 1:  # because of the last iteration
                         self.list_element[-1].end = t[i] + current_p.burst_time
+                        t.append(t[i] + current_p.burst_time)
                         del current_list_p[0]
                         current_p = None
                     else : # da l 3ady
@@ -116,7 +117,6 @@ class priority(scheduler):
                         elif t[i] + current_p.burst_time > t[i + 1]:
                             current_p.burst_time = current_p.burst_time - (t[i + 1] - t[i])
             x=len(t)
-            print(i,x)
             i=i+1
     def calc(self):
         if self.preemptive==0: self.calc_non_p()
