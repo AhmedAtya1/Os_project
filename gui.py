@@ -7,33 +7,29 @@ from Priority import  priority
 from Element import element
 root=Tk()
 root.title("cpu scheduler")
-
-List_of_elemnts=[]
 def stage1(event):
     list_of_process=[]
-
     def reset(event):
-        global List_of_elemnts
         main_frame.pack_forget()
         main_frame.destroy()
-        List_of_elemnts = []
-    def draw():
+    def draw(List_of_elemnts):
         gantt = Frame(main_frame)
         gantt.pack()
         x = 0
         for i in List_of_elemnts:
+            print("ya_rab")
             s = i.p.name+" ( "+str(i.start)+" : " +str(i.end)+" )"
-            e = Label(gantt, text=s, borderwidth=2, relief="solid", width=7 + int(i.end - i.start), height=5)
+            e = Label(gantt, text=s, borderwidth=2, relief="solid", width=10 + int(i.end - i.start), height=5)
             e.grid(row=0, column=int(x))
-            x = x + (i.end - i.start)
+            if x==int(x + (i.end - i.start)) : x=x+1
+            else : x = x + (i.end - i.start)
     def claculate(event):
-        global  List_of_elemnts
         if s == "fcfs":
             f1 = fcfs()
             f1.list_process = list_of_process
             f1.calc()
-            List_of_elemnts=f1.list_element
-            draw()
+
+            draw(f1.list_element)
         elif s == "sjf":
             pre=int(pree_entry.get())
             pree_entry.delete(0, END)
@@ -41,8 +37,7 @@ def stage1(event):
             f1.preemptive=pre
             f1.list_process = list_of_process
             f1.calc()
-            List_of_elemnts = f1.list_element
-            draw()
+            draw(f1.list_element)
         elif s == "priority":
             pre = int(pree_entry.get())
             pree_entry.delete(0, END)
@@ -50,14 +45,12 @@ def stage1(event):
             f1.preemptive = pre
             f1.list_process = list_of_process
             f1.calc()
-            List_of_elemnts = f1.list_element
-            draw()
+            draw(f1.list_element)
         elif s == "rr":
             f1 = round()
             f1.list_process = list_of_process
             f1.calc()
-            List_of_elemnts = f1.list_element
-            draw()
+            draw(f1.list_element)
     def show(i):
         def get_info(event):
             P = process()

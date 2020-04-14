@@ -35,7 +35,10 @@ def stage1(event):
             s = i.p.name+" ( "+str(i.start)+" : " +str(i.end)+" )"
             e = Label(frame, text=s, borderwidth=2, relief="solid", width=10 + int(i.end - i.start), height=5)
             e.grid(row=0, column=int(x))
-            x = x + (i.end - i.start)
+            if x == int(x + (i.end - i.start)):
+                x = x + 1
+            else:
+                x = x + (i.end - i.start)
         lb =Label(gantt,text=wait)
         lb.pack()
     def claculate(event):
