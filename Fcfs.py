@@ -4,6 +4,7 @@ import operator
 class fcfs (scheduler):
     currentTime = 0
 
+
     def addElement(self,start,proc):
         a = element()
         a.start=start
@@ -13,6 +14,7 @@ class fcfs (scheduler):
         self.list_element.append(a)
         self.currentTime =a.end
     def calc(self):
+        self.int_le3yon_a7md_m7mod()
         self.list_process.sort(key=operator.attrgetter('arrival_time'))
         for i in range(len(self.list_process)):
             if (self.list_process[i]).arrival_time>self.currentTime:

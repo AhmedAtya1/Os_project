@@ -1,7 +1,7 @@
 from tkinter import *
 from Process import process
 from Fcfs import fcfs
-from Round import round
+from Round import roound
 from SJF import Sjf
 from Priority import  priority
 import os
@@ -84,7 +84,7 @@ def stage1(event):
         elif s == "rr":
             q = int(q_entry.get())
             q_entry.delete(0, END)
-            f1 = round()
+            f1 = roound()
             f1.list_process = list_of_process
             f1.quantum=q
             f1.real()
