@@ -32,7 +32,7 @@ def stage1(event):
         x = 0
         for i in List_of_elemnts:
             s = i.p.name+" ( "+str(i.start)+" : " +str(i.end)+" )"
-            e = Label(frame, text=s, borderwidth=2, relief="solid", width=7 + int(i.end - i.start), height=5)
+            e = Label(frame, text=s, borderwidth=2, relief="solid", width=10 + int(i.end - i.start), height=5)
             e.grid(row=0, column=int(x))
             x = x + (i.end - i.start)
     def claculate(event):
