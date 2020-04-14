@@ -4,7 +4,7 @@ from Fcfs import fcfs
 from copy import deepcopy
 from Element import element
 root=Tk()
-root.title("os cpu scheduler")
+root.title("cpu scheduler")
 
 
 def get_info(event):
@@ -52,7 +52,7 @@ def rr(n) : pass
 def stage1(event):
     list_of_process=[]
     preemptive=0
-    def show():
+    def show(i):
         def get_info(event):
             P = process()
             P.name = "p" + str(i + 1)
@@ -60,6 +60,9 @@ def stage1(event):
             P.arrival_time = int(at_entry.get())
             at_entry.delete(0, END)
             bt_entry.delete(0, END)
+            if s == "priority":
+                P.pr=int(pr_entry.get())
+                pr_entry.delete(0,END)
             list_of_process.append(P)
         s = "process " + str(i + 1)
         l = Label(down_frame, text=s)
@@ -69,9 +72,14 @@ def stage1(event):
         bt_Label = Label(down_frame, text="brust time ")
         bt_Label.grid(row=2)
         at_entry = Entry(down_frame)
-        bt_entry = Entry(down_frame)
         at_entry.grid(row=1, column=1)
+        bt_entry = Entry(down_frame)
         bt_entry.grid(row=2, column=1)
+        if s == "priority":
+            pr_Label = Label(down_frame, text="priority")
+            pr_Label.grid(row=3)
+            pr_entry = Entry(down_frame)
+            pr_entry.grid(row=3, column=1)
         b1 = Button(down_frame, text="OK")
         b1.bind("<Button-1>",get_info )
         b1.grid(row=3, column=1)
@@ -81,7 +89,9 @@ def stage1(event):
     n_entry.delete(0,END)
     down_frame = Frame(root)
     down_frame.pack(side=BOTTOM)
-    for i in range(n): show()
+    for i in range(n): show(i)
+    if s == "sjf" or  s=="priority" :
+        pree__Label = Label(down_frame, text="priority")
 
 
 
